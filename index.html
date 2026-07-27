@@ -47,6 +47,7 @@
         <span></span>
       </button>
     </div>
+    <div class="nav-overlay" id="nav-overlay"></div>
   </nav>
 
   <!-- ===== HERO SECTION ===== -->
@@ -525,18 +526,28 @@
     // ===== MOBILE MENU TOGGLE =====
     const hamburger = document.getElementById('nav-hamburger');
     const navLinks = document.getElementById('nav-links');
+    const navOverlay = document.getElementById('nav-overlay');
 
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
+    function toggleMenu() {
+      const isActive = hamburger.classList.toggle('active');
       navLinks.classList.toggle('active');
-    });
+      navOverlay.classList.toggle('active');
+      document.body.style.overflow = isActive ? 'hidden' : '';
+    }
+
+    function closeMenu() {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('active');
+      navOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', toggleMenu);
+    navOverlay.addEventListener('click', closeMenu);
 
     // Close mobile menu on link click
     navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-      });
+      link.addEventListener('click', closeMenu);
     });
 
     // ===== SCROLL ANIMATIONS =====
@@ -630,14 +641,16 @@
       }, 3000);
     }
 
-    // ===== PARALLAX EFFECT ON HERO =====
-    window.addEventListener('scroll', () => {
-      const hero = document.querySelector('.hero-bg img');
-      if (hero) {
-        const scrolled = window.scrollY;
-        hero.style.transform = `translateY(${scrolled * 0.3}px)`;
-      }
-    });
+    // ===== PARALLAX EFFECT ON HERO (desktop only) =====
+    if (window.matchMedia('(pointer: fine)').matches) {
+      window.addEventListener('scroll', () => {
+        const hero = document.querySelector('.hero-bg img');
+        if (hero) {
+          const scrolled = window.scrollY;
+          hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+        }
+      });
+    }
   </script>
 </body>
 
