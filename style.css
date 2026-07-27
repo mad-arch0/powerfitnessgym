@@ -869,6 +869,45 @@ h6 {
   margin-top: 48px;
 }
 
+/* Single, centered featured plan (custom-pricing layout). */
+.pricing-grid-single {
+  display: flex;
+  justify-content: center;
+}
+
+.pricing-grid-single .pricing-card {
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.pricing-card-price-custom {
+  font-size: 2.2rem;
+}
+
+.pricing-card-features-center {
+  text-align: left;
+  max-width: 320px;
+  margin: 0 auto 32px;
+}
+
+.pricing-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pricing-actions .pricing-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  flex: 1;
+  min-width: 180px;
+  justify-content: center;
+}
+
 .pricing-card {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
@@ -1500,14 +1539,23 @@ h6 {
 }
 
 @media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
   html {
     scroll-padding-top: 70px;
   }
 
+  /* Off-canvas drawer kept fully out of flow when closed so it never
+     inflates document scrollWidth (which body overflow-x:hidden does
+     not always suppress on mobile browsers). */
   .nav-links {
     position: fixed;
     top: 0;
-    right: -100%;
+    right: 0;
     width: 80%;
     max-width: 320px;
     height: 100dvh;
@@ -1519,7 +1567,9 @@ h6 {
     align-items: center;
     gap: 8px;
     padding: 40px 32px;
-    transition: right var(--transition-smooth);
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform var(--transition-smooth), visibility 0s linear var(--transition-smooth);
     border-left: 1px solid var(--color-border);
     z-index: 1001;
     overflow-y: auto;
@@ -1527,7 +1577,9 @@ h6 {
   }
 
   .nav-links.active {
-    right: 0;
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform var(--transition-smooth), visibility 0s;
   }
 
   .nav-links a {
@@ -1816,5 +1868,126 @@ h6 {
 
   .gallery-item:hover::after {
     opacity: 0.5;
+  }
+}
+
+/* ===== MOBILE POLISH ===== */
+@media (max-width: 768px) {
+  /* Tighter horizontal padding on small screens keeps content from
+     feeling cramped while preventing edge-touching text. */
+  .container {
+    padding: 0 20px;
+  }
+
+  /* Keep hero CTA buttons at a comfortable full-width tap target. */
+  .hero-actions .btn-primary,
+  .hero-actions .btn-secondary {
+    width: 100%;
+  }
+
+  /* Pricing card: collapse the two CTAs to a single comfortable column
+     and remove the desktop min-width that comes from inline styles. */
+  .pricing-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pricing-actions .btn-primary,
+  .pricing-actions .btn-secondary {
+    flex: 0 0 auto !important;
+    min-width: 0 !important;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  /* Contact form action buttons stay stacked and full-width for easy taps. */
+  .contact-actions {
+    flex-direction: column;
+    align-self: stretch;
+  }
+
+  .contact-actions .btn-primary,
+  .contact-actions .btn-secondary,
+  .contact-actions .btn-whatsapp {
+    width: 100%;
+  }
+
+  /* About image badge must not overflow the image on narrow screens. */
+  .about-image-badge {
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    padding: 10px 14px;
+  }
+
+  /* Make testimonial quote glyph non-interactive and prevent overlap. */
+  .testimonial-quote {
+    font-size: 2.4rem;
+    top: 16px;
+    right: 20px;
+  }
+
+  /* The CTA gradient box can show large decorative circles that overflow;
+     clip them so they never trigger horizontal scroll. */
+  .cta-box {
+    overflow: hidden;
+  }
+
+  /* Pricing "MOST POPULAR" ribbon sits flush at top; add breathing room. */
+  .pricing-card.featured {
+    padding-top: 28px;
+  }
+
+  /* Ensure the embedded map is touch-friendly and never overflows. */
+  .map-container,
+  .map-container iframe {
+    max-width: 100%;
+  }
+
+  /* Section spacing fine-tuning for vertical rhythm on phones. */
+  .about-grid,
+  .contact-grid {
+    gap: 36px;
+  }
+
+  .programs-grid,
+  .testimonials-grid,
+  .gallery-grid {
+    gap: 18px;
+  }
+}
+
+@media (max-width: 360px) {
+  /* Very small phones (e.g. older devices, 320px viewport). */
+  .container {
+    padding: 0 16px;
+  }
+
+  .hero-stat-number {
+    font-size: 1.5rem;
+  }
+
+  .nav-logo {
+    gap: 8px;
+    font-size: 1.2rem;
+  }
+
+  .nav-logo-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 1.05rem;
+  }
+
+  .nav-logo-text .fitness {
+    font-size: 1.1rem;
+  }
+
+  .pricing-card {
+    padding: 24px 16px;
+  }
+
+  .testimonial-card,
+  .program-card-content {
+    padding: 20px;
   }
 }
