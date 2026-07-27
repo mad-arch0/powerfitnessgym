@@ -1203,7 +1203,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.6;
 }
 
-.contact-form {
+.contact-form form {
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -1213,6 +1213,41 @@ h1, h2, h3, h4, h5, h6 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 18px;
+}
+
+.contact-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.contact-actions .btn-primary,
+.contact-actions .btn-secondary,
+.contact-actions .btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+}
+
+.btn-whatsapp {
+  background: #25d366;
+  color: #fff;
+  border: none;
+}
+
+.btn-whatsapp:hover {
+  background: #20ba5a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
 }
 
 .form-group {
@@ -1255,7 +1290,7 @@ h1, h2, h3, h4, h5, h6 {
   min-height: 120px;
 }
 
-.contact-form .btn-primary {
+.contact-actions {
   align-self: flex-start;
 }
 
