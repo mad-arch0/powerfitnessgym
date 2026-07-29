@@ -6,5 +6,5 @@
     </linearGradient>
   </defs>
   <rect width="32" height="32" rx="6" fill="url(#logo-grad)" />
-  <text x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="'Outfit', 'Inter', sans-serif" font-weight="900" font-size="14" fill="#ffffff">PF</text>
+  <text x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="'Outfit', 'Inter', sans-serif" font-weight="900" font-size="14" fill="#ffffff">MB</text>
 </svg>
